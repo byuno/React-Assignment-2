@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Validation from './Components/Validation'
+import Char from './Char/Char';
+
 class App extends Component{
 
   state ={
@@ -10,11 +12,25 @@ class App extends Component{
 
   inputChangedHandler = (event) => {
     this.setState({userInput: event.target.value})
+  }
 
-
+  deleteCharHandler = (index) => {
+    const text = this.state.userInput.split('');
+    text.splice(index, 1);
+    const updatedText = text.join('');
+    this.setState({userInput: updatedText});
   }
 
   render() { 
+
+    const charList = this.state.userInput.split('').map((char, index) => {
+      return <Char 
+      character={char} 
+      key={index}
+      clicked={() => this.deleteCharHandler(index)}/>;
+
+    });
+
     return (
       <div className="App">
         <h1> Assignment 2 </h1>
@@ -24,6 +40,7 @@ class App extends Component{
           value={this.state.userInput}></input>
         <p>{this.state.userInput}</p>
         <Validation inputLength={this.state.userInput.length}/>
+        {charList}
       </div>
     );
   }

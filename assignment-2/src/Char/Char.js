@@ -1,18 +1,19 @@
 import React from 'react'
 
-const char = () => {
+const char = (props) => {
 
   const style ={
     display: 'inline-lock',
     padding: '16px',
     margin: '16px',
     border: '1px solid black',
-    textAlign: center
+    textAlign: 'center',
+    width: '16px'
 
   }
   return(
-    <div style={style}>
-
+    <div style={style} onClick={props.clicked}>
+      {props.character}
     </div>
   )
 
